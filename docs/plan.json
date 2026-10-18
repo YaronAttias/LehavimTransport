@@ -1,0 +1,702 @@
+{
+  "id": "gvaot-bar-transport",
+  "revision": 1,
+  "updated": "2026-10-16",
+  "goal": "הורים מתאמים הסעות שבועיות לקבוצת ילדים בגבעות בר, עם שיבוץ ונוכחות משותפים.",
+  "recommendation": "מסמך אינטראקטיבי מתאים כאן כי התאריכים, הנוכחות, קיבולת הרכבים והממשק משפיעים זה על זה. התכנון מתעד מימוש קיים ומשמש לבקשות שינוי.",
+  "assumptions": [
+    "שם הילד שנבחר מזהה את המשפחה המסיעה; אין רשימת הורים נפרדת.",
+    "רכב 5 מקומות משאיר 4 מקומות לילדים ורכב 7 מקומות משאיר 6."
+  ],
+  "openDecisions": [],
+  "nodes": [
+    {
+      "id": "P1",
+      "parent": null,
+      "title": "כל הורה יכול להיכנס בקישור ולעדכן את הלוח",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [],
+      "assumptions": [],
+      "verification": [
+        "גישה ללא cookie פועלת; שיבוץ וניהול זמינים לכל בעל קישור."
+      ],
+      "implementation": [
+        "app/api/state/route.ts"
+      ],
+      "decisions": [
+        "D1"
+      ]
+    },
+    {
+      "id": "P1.1",
+      "parent": "P1",
+      "title": "אין מסך כניסה, קוד או הרשאה נפרדת לניהול.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "אין מסך כניסה, קוד או הרשאה נפרדת לניהול."
+      ],
+      "assumptions": [],
+      "verification": [
+        "גישה ללא cookie פועלת; שיבוץ וניהול זמינים לכל בעל קישור."
+      ],
+      "implementation": [
+        "app/api/state/route.ts"
+      ],
+      "decisions": []
+    },
+    {
+      "id": "P1.2",
+      "parent": "P1",
+      "title": "אין צורך בפריסה נוספת ל-Netlify כדי להשתמש באתר הפעיל.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "אין צורך בפריסה נוספת ל-Netlify כדי להשתמש באתר הפעיל."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P2",
+      "parent": null,
+      "title": "מוצג שבוע ההסעות הרלוונטי לפי התאריך בישראל",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [],
+      "assumptions": [],
+      "verification": [
+        "בדיקות גבול חצות, שעון קיץ/חורף ומעבר שנה; ניווט בין שבועות אינו משנה נתונים."
+      ],
+      "implementation": [
+        "app/model.ts"
+      ],
+      "decisions": [
+        "D3"
+      ]
+    },
+    {
+      "id": "P2.1",
+      "parent": "P2",
+      "title": "ראשון עד חמישי בלבד; חופש ואימון אישי מוסתרים.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "ראשון עד חמישי בלבד; חופש ואימון אישי מוסתרים."
+      ],
+      "assumptions": [],
+      "verification": [
+        "בדיקות גבול חצות, שעון קיץ/חורף ומעבר שנה; ניווט בין שבועות אינו משנה נתונים."
+      ],
+      "implementation": [
+        "app/model.ts"
+      ],
+      "decisions": []
+    },
+    {
+      "id": "P2.2",
+      "parent": "P2",
+      "title": "בשבת נפתח השבוע הבא; בראשון עד שישי השבוע שהתחיל בראשון האחרון.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "בשבת נפתח השבוע הבא; בראשון עד שישי השבוע שהתחיל בראשון האחרון."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P2.3",
+      "parent": "P2",
+      "title": "בחצות מעבר ברירת המחדל מתעדכן, אך ניווט ידני להיסטוריה נשמר.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "בחצות מעבר ברירת המחדל מתעדכן, אך ניווט ידני להיסטוריה נשמר."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P2.4",
+      "parent": "P2",
+      "title": "יום שעבר מקופל, היום וימים עתידיים פתוחים; אפשר לשנות ידנית.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "יום שעבר מקופל, היום וימים עתידיים פתוחים; אפשר לשנות ידנית."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P3",
+      "parent": null,
+      "title": "הורה תופס הלוך וחזור בנפרד באמצעות שם הילד",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [],
+      "assumptions": [],
+      "verification": [
+        "שתי משפחות מופיעות בהלוך ומשפחה אחרת בחזור; ביטול הלוך אינו מוחק חזור."
+      ],
+      "implementation": [
+        "app/Dashboard.tsx"
+      ],
+      "decisions": []
+    },
+    {
+      "id": "P3.1",
+      "parent": "P3",
+      "title": "בניהול מוגדרים עד שישה ילדים עם שם ושם משפחה.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "בניהול מוגדרים עד שישה ילדים עם שם ושם משפחה."
+      ],
+      "assumptions": [],
+      "verification": [
+        "שתי משפחות מופיעות בהלוך ומשפחה אחרת בחזור; ביטול הלוך אינו מוחק חזור."
+      ],
+      "implementation": [
+        "app/Dashboard.tsx"
+      ],
+      "decisions": []
+    },
+    {
+      "id": "P3.2",
+      "parent": "P3",
+      "title": "בחירה מרשימה סגורה; עד שני רכבים בכל כיוון.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "בחירה מרשימה סגורה; עד שני רכבים בכל כיוון."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P3.3",
+      "parent": "P3",
+      "title": "רישום חוזר לאותה משפחה וכיוון מעדכן גודל רכב ולא יוצר כפילות.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "רישום חוזר לאותה משפחה וכיוון מעדכן גודל רכב ולא יוצר כפילות."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P4",
+      "parent": null,
+      "title": "מספר הרכבים נגזר מהילדים שמגיעים ומהקיבולת",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [],
+      "assumptions": [],
+      "verification": [
+        "5 ילדים ושני רכבים קטנים אינם מסומנים כרכב עודף; 4 ילדים ושני רכבים קטנים כן."
+      ],
+      "implementation": [
+        "app/model.ts"
+      ],
+      "decisions": []
+    },
+    {
+      "id": "P4.1",
+      "parent": "P4",
+      "title": "עד 4 ילדים: רכב קטן אחד מספיק.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "עד 4 ילדים: רכב קטן אחד מספיק."
+      ],
+      "assumptions": [],
+      "verification": [
+        "5 ילדים ושני רכבים קטנים אינם מסומנים כרכב עודף; 4 ילדים ושני רכבים קטנים כן."
+      ],
+      "implementation": [
+        "app/model.ts"
+      ],
+      "decisions": []
+    },
+    {
+      "id": "P4.2",
+      "parent": "P4",
+      "title": "5 או 6 ילדים: שני רכבים קטנים או רכב גדול אחד.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "5 או 6 ילדים: שני רכבים קטנים או רכב גדול אחד."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P4.3",
+      "parent": "P4",
+      "title": "מקום אחד שמור לנהג; מספיקות רכב אחד נבדקת על רכב מסוים, לא על סך המקומות בשני רכבים.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "מקום אחד שמור לנהג; מספיקות רכב אחד נבדקת על רכב מסוים, לא על סך המקומות בשני רכבים."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P5",
+      "parent": null,
+      "title": "היעדרויות מאוחרות משנות חישוב בלי למחוק שיבוץ",
+      "source": "בקשה וסוגיית מימוש",
+      "status": "implemented",
+      "requirements": [],
+      "assumptions": [],
+      "verification": [
+        "בדיקות late absence, אפס נוסעים, שימור שיבוצים וחזרה לנוכחות עברו."
+      ],
+      "implementation": [
+        "app/model.ts"
+      ],
+      "decisions": [
+        "D2"
+      ]
+    },
+    {
+      "id": "P5.1",
+      "parent": "P5",
+      "title": "כולם מגיעים כברירת מחדל; היעדרויות שמורות אינן מתאפסות בטעינה.",
+      "source": "בקשה וסוגיית מימוש",
+      "status": "implemented",
+      "requirements": [
+        "כולם מגיעים כברירת מחדל; היעדרויות שמורות אינן מתאפסות בטעינה."
+      ],
+      "assumptions": [],
+      "verification": [
+        "בדיקות late absence, אפס נוסעים, שימור שיבוצים וחזרה לנוכחות עברו."
+      ],
+      "implementation": [
+        "app/model.ts"
+      ],
+      "decisions": []
+    },
+    {
+      "id": "P5.2",
+      "parent": "P5",
+      "title": "עדכון נוכחות סגור עד לחיצה ורלוונטי ליום מסוים.",
+      "source": "בקשה וסוגיית מימוש",
+      "status": "implemented",
+      "requirements": [
+        "עדכון נוכחות סגור עד לחיצה ורלוונטי ליום מסוים."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P5.3",
+      "parent": "P5",
+      "title": "רכב עודף, ילד של מסיע שנעדר ואפס נוסעים מקבלים הערת תיאום בצבע כחול-סגלגל.",
+      "source": "בקשה וסוגיית מימוש",
+      "status": "implemented",
+      "requirements": [
+        "רכב עודף, ילד של מסיע שנעדר ואפס נוסעים מקבלים הערת תיאום בצבע כחול-סגלגל."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P5.4",
+      "parent": "P5",
+      "title": "ביטול נשאר ידני; החזרת ילד לנוכחות מסירה הערות שכבר לא רלוונטיות.",
+      "source": "בקשה וסוגיית מימוש",
+      "status": "implemented",
+      "requirements": [
+        "ביטול נשאר ידני; החזרת ילד לנוכחות מסירה הערות שכבר לא רלוונטיות."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P6",
+      "parent": null,
+      "title": "לוח מתמונה הופך לשבוע שניתן לבדוק ולאשר",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [],
+      "assumptions": [],
+      "verification": [
+        "שתי תמונות המקור נקראו; ייבוא בדפדפן נשמר במסד QA; בדיקה ידנית נדרשת בכל ייבוא."
+      ],
+      "implementation": [
+        "app/ScheduleImport.tsx"
+      ],
+      "decisions": []
+    },
+    {
+      "id": "P6.1",
+      "parent": "P6",
+      "title": "JPG/PNG/WebP עד 15MB, לוח 7 או 5 עמודות מימין לשמאל.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "JPG/PNG/WebP עד 15MB, לוח 7 או 5 עמודות מימין לשמאל."
+      ],
+      "assumptions": [],
+      "verification": [
+        "שתי תמונות המקור נקראו; ייבוא בדפדפן נשמר במסד QA; בדיקה ידנית נדרשת בכל ייבוא."
+      ],
+      "implementation": [
+        "app/ScheduleImport.tsx"
+      ],
+      "decisions": []
+    },
+    {
+      "id": "P6.2",
+      "parent": "P6",
+      "title": "OCR עברי ואנגלי בדפדפן; התמונה אינה נשמרת במסד.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "OCR עברי ואנגלי בדפדפן; התמונה אינה נשמרת במסד."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P6.3",
+      "parent": "P6",
+      "title": "תצוגה מקדימה ותיקון תאריך, שעות ופעילות לפני אישור.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "תצוגה מקדימה ותיקון תאריך, שעות ופעילות לפני אישור."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P6.4",
+      "parent": "P6",
+      "title": "חזרה מחושבת 90 דקות לאחר התחלה וניתנת לעריכה.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "חזרה מחושבת 90 דקות לאחר התחלה וניתנת לעריכה."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P6.5",
+      "parent": "P6",
+      "title": "ייבוא לשבוע קיים שומר נוכחות ושיבוצים.",
+      "source": "בקשה מפורשת",
+      "status": "implemented",
+      "requirements": [
+        "ייבוא לשבוע קיים שומר נוכחות ושיבוצים."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P7",
+      "parent": null,
+      "title": "הסיכום קריא בטלפון ומציג את כל המסיעים",
+      "source": "בקשה ועיצוב מימוש",
+      "status": "implemented",
+      "requirements": [],
+      "assumptions": [],
+      "verification": [
+        "רוחבים 320,375,390,430,448 נבדקו ללא גלילה אופקית; שמות נשארו 16px."
+      ],
+      "implementation": [
+        "app/RideOverview.tsx"
+      ],
+      "decisions": [
+        "D4"
+      ]
+    },
+    {
+      "id": "P7.1",
+      "parent": "P7",
+      "title": "יום, תאריך, הגעה, הלוך וחזור מוצגים מעל אזור הבחירה.",
+      "source": "בקשה ועיצוב מימוש",
+      "status": "implemented",
+      "requirements": [
+        "יום, תאריך, הגעה, הלוך וחזור מוצגים מעל אזור הבחירה."
+      ],
+      "assumptions": [],
+      "verification": [
+        "רוחבים 320,375,390,430,448 נבדקו ללא גלילה אופקית; שמות נשארו 16px."
+      ],
+      "implementation": [
+        "app/RideOverview.tsx"
+      ],
+      "decisions": []
+    },
+    {
+      "id": "P7.2",
+      "parent": "P7",
+      "title": "כל הרכבים בכיוון מוצגים; חסרים מסומנים בכתום והיום הנוכחי בזהוב.",
+      "source": "בקשה ועיצוב מימוש",
+      "status": "implemented",
+      "requirements": [
+        "כל הרכבים בכיוון מוצגים; חסרים מסומנים בכתום והיום הנוכחי בזהוב."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P7.3",
+      "parent": "P7",
+      "title": "קווי הפרדה בטבלה; בנייד כל יום נפרס לבלוק עם פרטי יום והלוך/חזור.",
+      "source": "בקשה ועיצוב מימוש",
+      "status": "implemented",
+      "requirements": [
+        "קווי הפרדה בטבלה; בנייד כל יום נפרס לבלוק עם פרטי יום והלוך/חזור."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P7.4",
+      "parent": "P7",
+      "title": "טקסט ראשי 16px כברירת מחדל, משני 14px, יחידות rem, כפתורים גדולים וזום מותר.",
+      "source": "בקשה ועיצוב מימוש",
+      "status": "implemented",
+      "requirements": [
+        "טקסט ראשי 16px כברירת מחדל, משני 14px, יחידות rem, כפתורים גדולים וזום מותר."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P7.5",
+      "parent": "P7",
+      "title": "viewport ו-safe areas מותאמים ל-iPhone; בדיקה פיזית ב-Safari עדיין לא בוצעה.",
+      "source": "בקשה ועיצוב מימוש",
+      "status": "implemented",
+      "requirements": [
+        "viewport ו-safe areas מותאמים ל-iPhone; בדיקה פיזית ב-Safari עדיין לא בוצעה."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P7.6",
+      "parent": "P7",
+      "title": "הכותרת השיווקית הוסרה וכפתור העתקה נמצא ליד ניהול.",
+      "source": "בקשה ועיצוב מימוש",
+      "status": "implemented",
+      "requirements": [
+        "הכותרת השיווקית הוסרה וכפתור העתקה נמצא ליד ניהול."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P8",
+      "parent": null,
+      "title": "עדכונים משותפים נשמרים בלי לדרוס הורה אחר",
+      "source": "החלטת מימוש",
+      "status": "implemented",
+      "requirements": [],
+      "assumptions": [],
+      "verification": [
+        "בדיקות כתיבה מקבילה עברו; בדיקות אינטגרציה מבודדות מהייצור; TypeScript ובנייה עברו."
+      ],
+      "implementation": [
+        "app/api/state/route.ts"
+      ],
+      "decisions": []
+    },
+    {
+      "id": "P8.1",
+      "parent": "P8",
+      "title": "React/TypeScript/CSS, Vinext, Sites/Cloudflare Workers ו-D1/SQLite.",
+      "source": "החלטת מימוש",
+      "status": "implemented",
+      "requirements": [
+        "React/TypeScript/CSS, Vinext, Sites/Cloudflare Workers ו-D1/SQLite."
+      ],
+      "assumptions": [],
+      "verification": [
+        "בדיקות כתיבה מקבילה עברו; בדיקות אינטגרציה מבודדות מהייצור; TypeScript ובנייה עברו."
+      ],
+      "implementation": [
+        "app/api/state/route.ts"
+      ],
+      "decisions": []
+    },
+    {
+      "id": "P8.2",
+      "parent": "P8",
+      "title": "מצב משותף ב-JSON ו-revision; כתיבה מותנית בגרסה ומחזירה 409 במקרה התנגשות.",
+      "source": "החלטת מימוש",
+      "status": "implemented",
+      "requirements": [
+        "מצב משותף ב-JSON ו-revision; כתיבה מותנית בגרסה ומחזירה 409 במקרה התנגשות."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P8.3",
+      "parent": "P8",
+      "title": "רענון לאחר שמירה וקריאת עדכונים כל 15 שניות.",
+      "source": "החלטת מימוש",
+      "status": "implemented",
+      "requirements": [
+        "רענון לאחר שמירה וקריאת עדכונים כל 15 שניות."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    },
+    {
+      "id": "P8.4",
+      "parent": "P8",
+      "title": "14 בדיקות אוטומטיות, בדיקות D1 אמיתי ובדיקות UI מקומיות; פריסה אינה מאפסת נתונים.",
+      "source": "החלטת מימוש",
+      "status": "implemented",
+      "requirements": [
+        "14 בדיקות אוטומטיות, בדיקות D1 אמיתי ובדיקות UI מקומיות; פריסה אינה מאפסת נתונים."
+      ],
+      "assumptions": [],
+      "verification": [],
+      "implementation": [],
+      "decisions": []
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D1",
+      "node": "P1",
+      "prompt": "מי יכול להשתמש במסך הניהול?",
+      "status": "implemented",
+      "recordedAnswer": "public",
+      "answerSource": "בקשה מפורשת של המשתמש",
+      "recommendation": "public",
+      "options": [
+        {
+          "id": "public",
+          "label": "כל מי שיש לו קישור",
+          "consequence": "הגישה הנוכחית, ללא קוד או חשבון."
+        },
+        {
+          "id": "restricted",
+          "label": "כניסה מוגבלת",
+          "consequence": "שינוי תכולה שמצריך תכנון הרשאות וכניסה."
+        }
+      ]
+    },
+    {
+      "id": "D2",
+      "node": "P5",
+      "prompt": "האם היעדרות מבטלת הסעה שכבר נרשמה?",
+      "status": "implemented",
+      "recordedAnswer": "keep",
+      "answerSource": "החלטת מימוש; אין בקשה מפורשת לביטול אוטומטי",
+      "recommendation": "keep",
+      "options": [
+        {
+          "id": "keep",
+          "label": "השיבוץ נשמר ומוצגת הערת תיאום",
+          "consequence": "מונע ביטול הסעה של הורה שעדיין יכול להסיע."
+        },
+        {
+          "id": "cancel",
+          "label": "ביטול אוטומטי",
+          "consequence": "שינוי שעלול להסיר הסעה נדרשת; דורש הכרעה מפורשת."
+        }
+      ]
+    },
+    {
+      "id": "D3",
+      "node": "P2",
+      "prompt": "איזה שבוע נפתח בשבת?",
+      "status": "implemented",
+      "recordedAnswer": "next",
+      "answerSource": "בקשה מפורשת של המשתמש",
+      "recommendation": "next",
+      "options": [
+        {
+          "id": "next",
+          "label": "ראשון הבא",
+          "consequence": "השבוע הקודם כבר הסתיים מבחינת ההסעות."
+        },
+        {
+          "id": "current",
+          "label": "ראשון האחרון",
+          "consequence": "מציג את השבוע שכבר עבר."
+        }
+      ]
+    },
+    {
+      "id": "D4",
+      "node": "P7",
+      "prompt": "איך מציגים סיכום קריא בנייד?",
+      "status": "implemented",
+      "recordedAnswer": "blocks",
+      "answerSource": "החלטת עיצוב שנבחרה בעקבות בקשת קריאות",
+      "recommendation": "blocks",
+      "options": [
+        {
+          "id": "blocks",
+          "label": "בלוק לכל יום",
+          "consequence": "שמות ושעות גדולים ללא דחיסה או גלילה אופקית."
+        },
+        {
+          "id": "table",
+          "label": "טבלה רחבה עם גלילה",
+          "consequence": "אפשרות עתידית שדורשת שינוי עיצוב."
+        }
+      ]
+    }
+  ]
+}
